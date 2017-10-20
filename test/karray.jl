@@ -33,14 +33,14 @@ if gpu() >= 0
                       ([1,3],:), (:,[1,3]),             # Vector{Int},Colon
                       ([2,2],:), (:,[2,2]),             # Repeated index
                       ([],),                            # Empty Array
-                      ((a.>0.5),),                      # BitArray
+                    #   ((a.>0.5),),                      # BitArray
                       ([1 3; 2 4],),                    # Array{Int}
                       (CartesianIndex(3,),), (CartesianIndex(2,3),), # CartesianIndex
-                      (if VERSION >= v"0.5.0"
-                           [(:,a[1,:].>0.5),(a[:,1].>0.5,:),  # BitArray2 # FAIL for julia4
-                            ([CartesianIndex(2,2), CartesianIndex(2,1)],)] # Array{CartesianIndex} # FAIL for julia4
-                       else [] end)...
-                      )
+                    #   (if VERSION >= v"0.5.0"
+                    #     #    [(:,a[1,:].>0.5),(a[:,1].>0.5,:),  # BitArray2 # FAIL for julia4
+                    #         # ([CartesianIndex(2,2), CartesianIndex(2,1)],)] # Array{CartesianIndex} # FAIL for julia4
+                    #    else [] end)...
+                )
                 #@show i
                 @test a[i...] == k[i...]
                 ai = a[i...]
@@ -57,7 +57,7 @@ if gpu() >= 0
             @test a[2:end] == k[2:end]
             @test a[2:end,2:end] == k[2:end,2:end]
             # k.>0.5 returns KnetArray{T}, no Knet BitArrays yet
-            @test a[a.>0.5] == k[k.>0.5]
+            # @test a[a.>0.5] == k[k.>0.5]
         end
 
         # Unsupported indexing etc.:
